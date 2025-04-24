@@ -2,6 +2,8 @@ import requests
 from dotenv import load_dotenv
 import os
 
+# Este modulo se encarga de definir la función que va a llamar las credenciales del envirioment
+
 def CargarConfiguracion():
     load_dotenv()
     api_key = os.getenv("API_KEY_SEARCH_GOOGLE")
@@ -10,6 +12,9 @@ def CargarConfiguracion():
         print("Error: Las variables de entorno no están configuradas correctamente.")
         exit()
     return api_key, search_engine_id
+    
+# Este modulo se encarga de estructurar el url
+
 def ConstruirUrl(api_key, search_engine_id, query, page, lang):
     return f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={search_engine_id}&q={query}&start={page}&lr={lang}"
 def RealizarBusqueda(url):
@@ -21,6 +26,8 @@ def RealizarBusqueda(url):
     except requests.exceptions.RequestException as e:
         print(f"Error al realizar la solicitud: {e}")
         return None
+        
+# Este modulo se encarga de buscar los links 
 
 def procesar_resultados(resultados):
     if not resultados:
@@ -35,6 +42,8 @@ def procesar_resultados(resultados):
         print(f"Link: {link}")
         print(f"Snippet: {snippet}")
         print("-" * 80)
+
+# Da los resultados de la búsqueda del modulo anterior
 
 def main():
     api_key, search_engine_id = CargarConfiguracion()
@@ -52,3 +61,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# En resumen el codigo se ordenó, dividiendolo en partes mas pequeñas y sencillas de entender, ocupando la programación modular
